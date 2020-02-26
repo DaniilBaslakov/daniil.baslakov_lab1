@@ -84,7 +84,7 @@ void    fill_arr(char *str, int *un)
     }
     //s_symbal.symb[count] = '\0';
 }
-int     main(void)
+int     main(int argc, char **argv)
 {
     char            *str;
     int             i;
@@ -92,6 +92,8 @@ int     main(void)
 
     un = 0;
     str = "Hello, world!";
+    if (argc == 2)
+        str = argv[1];
     fill_arr(str, &un);
     bubble_sort(&un);
     i = 0;
