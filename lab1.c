@@ -5,14 +5,14 @@ struct          s_unical
 {
     char        symb[256];
     int         freq[256];
-}               s_symbal;
+}               s_symbol;
 
 void    bubble_sort(int *un)
 {
-    int i;
-    int temp;
-    int j;
-    char temp2;
+    int     i;
+    int     temp;
+    int     j;
+    char    temp2;
 
     i = 0;
     while (i < *un)
@@ -21,20 +21,21 @@ void    bubble_sort(int *un)
         while (j < *un)
         {
             
-            if (s_symbal.freq[j + 1] && (s_symbal.freq[j + 1] > s_symbal.freq[j]))
+            if (s_symbol.freq[j + 1] && (s_symbol.freq[j + 1] > s_symbol.freq[j]))
             {
-                temp = s_symbal.freq[j];
-                s_symbal.freq[j] = s_symbal.freq[j + 1];
-                s_symbal.freq[j + 1] = temp;
-                temp2 = s_symbal.symb[j];
-                s_symbal.symb[j] = s_symbal.symb[j + 1];
-                s_symbal.symb[j + 1] = temp2;
+                temp = s_symbol.freq[j];
+                s_symbol.freq[j] = s_symbol.freq[j + 1];
+                s_symbol.freq[j + 1] = temp;
+                temp2 = s_symbol.symb[j];
+                s_symbol.symb[j] = s_symbol.symb[j + 1];
+                s_symbol.symb[j + 1] = temp2;
             }
             j++;
         }
         i++;
     }
 }
+
 void    increase_freq(char str)
 {
     int i;
@@ -42,11 +43,11 @@ void    increase_freq(char str)
     i = 0;
     while (i < 256)
     {
-        if (s_symbal.symb[i] == str)
+        if (s_symbol.symb[i] == str)
             break;
         i++;
     }
-    s_symbal.freq[i] += 1;
+    s_symbol.freq[i] += 1;
 }
 
 int    check_symb(char str)
@@ -56,7 +57,7 @@ int    check_symb(char str)
     i = 0;
     while (i < 256)
     {
-        if (s_symbal.symb[i++] == str)
+        if (s_symbol.symb[i++] == str)
             return (1);
     }
     return (0);    
@@ -75,20 +76,21 @@ void    fill_arr(char *str, int *un)
             increase_freq(str[count]);  
         else
         {
-            s_symbal.symb[i] = str[count];
-            s_symbal.freq[i] = 1;
+            s_symbol.symb[i] = str[count];
+            s_symbol.freq[i] = 1;
             *un += 1;
             i++;
         }
         count++;
     }
-    //s_symbal.symb[count] = '\0';
+    s_symbol.symb[i + 1] = '\0';
 }
+
 int     main(int argc, char **argv)
 {
-    char            *str;
-    int             i;
-    int             un;
+    char    *str;
+    int     i;
+    int     un;
 
     un = 0;
     str = "Hello, world!";
@@ -97,10 +99,17 @@ int     main(int argc, char **argv)
     fill_arr(str, &un);
     bubble_sort(&un);
     i = 0;
-    while (s_symbal.symb[i])
+    while (s_symbol.symb[i])
     {
-        printf("s_symbal.symb %c | s_symbal.freq %d |  count %d\n", s_symbal.symb[i], s_symbal.freq[i], i + 1);
+        printf("%c ", s_symbol.symb[i]);
         i++;
-    }  
+    } 
+    putchar('\n');
+    i = 0;
+    while (s_symbol.symb[i])
+    {
+        printf("%d ", s_symbol.freq[i]);
+        i++;
+    } 
     return (0);
 }
